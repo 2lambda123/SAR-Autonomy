@@ -1,0 +1,60 @@
+<launch>
+    <!-- Configure and launch ROSPlan components-->
+
+    <!-- Launch the knowledge base -->
+    <node name="rosplan_knowledge_base" pkg="rosplan_knowledge_base" type="knowledgeBase" respawn="false" output="screen" />
+    
+    <!-- Launch the scene database (MongoDB) -->
+    <node name="rosplan_scene_database" pkg="mongodb_store" type="mongodb_server.py" respawn="false" output="log">
+    	<param name="database_path" value="$(find rosplan_config)/knowledge_base/mongoDB" />
+    </node>
+    <node name="rosplan_scene_message_store" pkg="mongodb_store" type="message_store_node.py" respawn="false" output="log" />
+    
+    <!-- Paths -->
+    <param name="/rosplan/domain_path" value="$(find sar_exploration)/common/domain.pddl" />
+    <param name="/rosplan/planner_path" value="$(find rosplan_config)/planner/bin/" />
+    
+    <!-- Launch the planning system -->
+    <node name="rosplan_planning_system" pkg="rosplan_planning_system" type="planner" respawn="false" output="screen">
+        <!-- directory for generated files -->
+        <param name="data_path" value="$(find sar_exploration)/common/" />
+        <param name="problem_path" value="$(find sar_exploration)/common/problem.pddl" />
+        <param name="strl_file_path" value="$(find sar_exploration)/common/plan.strl" />
+        <param name="dispatch_concurrent" value="false"/>
+        <param name="dispatch_on_completion" value="true"/>
+    
+        <!-- to run the planner -->
+        <param name="planner_command" value="timeout 10 $(find rosplan_config)/planner/bin/popf -n DOMAIN PROBLEM" />
+        <param name="generate_default_problem" value="true" />
+        <param name="max_dispatch_attempts" value="2" />
+    </node>
+    
+    <!-- interfaces -->
+    <!--node name="rosplan_roadmap_server" pkg="rosplan_interface_mapping" type="rpsimplemapServer" respawn="false" output="screen"/>
+    <param name="waypoint_file" value="$(find sar_exploration)/src/waypoints.txt"/>
+    <param name="data_path" value="$(find sar_exploration)/common/" /-->
+
+    <!-- Action server to handle drone actions-->
+    <node name="drone_action_server" pkg="sar_drone_interface" type="ARDroneActionServer.py" respawn="false" output="screen">
+    </node>
+    
+    <node name="rosplan_interface_movebase" pkg="rosplan_interface_movebase" type="rpmovebase" respawn="false" output="screen">
+    	<param name="action_server" value="/move_base" />
+    	<param name="pddl_action_name" value="drive-to" />
+    </node>
+
+    <node name="rosplan_pick_crate" pkg="sar_rpaction_interface" type="rppickcrate" respawn="false" output="screen">
+    	<param name="action_server" value="/pick_crate" />
+    	<param name="pddl_action_name" value="pick-crate" />
+    </node>
+
+    <node name="rosplan_load_crate" pkg="sar_rpaction_interface" type="rploadcrate" respawn="false" output="screen">
+    	<param name="action_server" value="/load_crate" />
+    	<param name="pddl_action_name" value="load-crate" />
+    </node>
+
+    <node name="rosplan_deliver_crate" pkg="sar_rpaction_interface" type="rpdelivercrate" respawn="false" output="screen">
+    	<param name="action_server" value="/deliver_crate" />
+    	<param name="pddl_action_name" value="deliver-crate" />
+    </node>
+</launch>

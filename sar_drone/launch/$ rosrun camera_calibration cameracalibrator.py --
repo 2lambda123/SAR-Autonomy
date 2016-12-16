@@ -1,0 +1,1 @@
+$ rosrun camera_calibration cameracalibrator.py --size 9x6 --square 0.037 image:=/camera/image_raw camera:=/camera

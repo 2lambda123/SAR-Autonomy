@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Launch mission -->
+    <node name="sar_mission" pkg="sar_planning" type="explore_and_deliver.py"/>
+</launch>

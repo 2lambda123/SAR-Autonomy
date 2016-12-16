@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Launch ROSPlan-->
+    <include file="$(find sar_exploration)/launch/includes/rosplan.launch.xml"/>    
+
+    <!-- Create object instances and set initial state -->
+    <node name="sar_initial_state" pkg="sar_planning" type="set_initial_state.py"/>
+
+    <!-- Load exploration waypoints from file to knowledge base -->
+    <node name="sar_explore_wp" pkg="sar_exploration" type="tbot_load_exploration_wp.py"/>
+
+    <!-- Create ARTag interface node-->
+    <node name="artag_interface" pkg="sar_planning" type="ARTagLocationInterface.py"/>
+
+    <!-- Start AprilTag detection-->
+    <node name="apriltag_detector" pkg="sar_apriltags" type="april_tags_tb"/>
+
+</launch>

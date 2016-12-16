@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Load exploration waypoints and add goals -->
+    <node name="tbot_exploration" pkg="sar_exploration" type="tbot_explore.py"/>
+
+</launch>

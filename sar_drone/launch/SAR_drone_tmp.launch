@@ -1,0 +1,14 @@
+	<!-- Launches the keyboard controller -->
+	<node name="SAR_drone_ctrl_node" pkg="sar_drone" type="SAR_drone_ctrl_node.py" required="true"/>
+
+	<!-- april tag detection node -->
+  <node name="april_tags" pkg="task3_opencv" type="april_tag_detection.cpp" required="true"/>
+
+<!-- localization node -->
+  <node name="SAR_drone_localization_node" pkg="sar_drone" type="SAR_drone_localization_node.py " required="true"/>
+
+  <node pkg="rosservice" type="rosservice" name="togglecam" args="call --wait /ardrone/togglecam"/>
+
+
+    <!-- Launches the optical flow node -->
+  <node name="optic_flow_calculator" pkg="optical_flow_example" type="optic_flow_lucas_kanade.py" required="true"/>

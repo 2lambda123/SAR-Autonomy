@@ -1,0 +1,11 @@
+# Load crate onto a carrier, turtlebot, etc
+
+# Define the goal
+string crate_id
+geometry_msgs/Point crate_position
+---
+# Define the result
+bool crate_loaded
+---
+# Define a feedback message
+# No intermediate feedback

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Launch gmapping locally on turtlebot sar_gmapping/launch/gmapping.launch)-->
+    
+    <!-- Launch visualization -->
+    <!-- node name="rviz" pkg="rviz" type="rviz" args="-d $(find rosplan_demos)/rviz/turtlebot.rviz"/-->
+
+    <!-- Launch move_base-->
+    <include file="$(find sar_exploration)/launch/includes/move_base.launch.xml"/>
+
+    <!-- Launch ROSPlan-->
+    <include file="$(find sar_exploration)/launch/includes/rosplan.launch.xml"/>    
+
+    <!-- Create object instances and set initial state -->
+    <node name="sar_initialize" pkg="sar_planning" type="set_initial_state.py"/>
+
+    <!-- Load exploration waypoints and add goals -->
+    <node name="tbot_exploration" pkg="sar_exploration" type="tbot_explore.py"/>
+
+</launch>

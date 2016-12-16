@@ -1,0 +1,11 @@
+# Pick crate action to be handled by the drone
+
+# Define the goal
+string crate_id
+geometry_msgs/Point crate_position
+---
+# Define the result
+bool crate_picked
+---
+# Define a feedback message
+# No intermediate feedback

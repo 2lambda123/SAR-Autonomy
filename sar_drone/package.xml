@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <name>sar_drone</name>
+  <version>1.0.0</version>
+  <description>The SARdrone package</description>
+
+  <maintainer email="larsvens@kth.se">Lars Svenson</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>std_msgs</buildtool_depend>
+  <buildtool_depend>rospy</buildtool_depend>
+
+</package>

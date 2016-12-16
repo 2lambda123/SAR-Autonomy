@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package>
+  <name>sar_demos</name>
+  <version>1.0.0</version>
+  <description>Demos for SAR-Autonomy</description>
+
+  <maintainer email="vidits@kth.se">Vidit</maintainer>
+
+
+  <license>BSD</license>
+
+  <!-- <url type="repository">http://wiki.ros.org/sar_autonomy</url> -->
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>

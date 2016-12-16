@@ -1,0 +1,28 @@
+
+rosservice call /ardrone/togglecam
+
+
+
+# run modified apriltags node 
+rosrun task3_opencv april_tags
+
+
+# calibration
+rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.108 image:=/camera/image_raw camera:=/camera
+
+
+###
+
+		# convert quaternions
+		x_tag = tag_pose.position.x
+		y_tag = tag_pose.position.y
+		quaternion = (
+		    tag_pose.orientation.x,
+		    tag_pose.orientation.y,
+		    tag_pose.orientation.z,
+		    tag_pose.orientation.w)
+		euler = tf.transformations.euler_from_quaternion(quaternion)
+		#roll_tag = euler[0]
+		#pitch_tag = euler[1]
+		yaw_tag = euler[2]
+		

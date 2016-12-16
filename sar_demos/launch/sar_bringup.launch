@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Bringup the turtlebot-->
+    <include file="$(find turtlebot_bringup)/launch/minimal.launch"/>
+
+    <!-- Launch gmapping locally on turtlebot-->
+    <include file="$(find sar_gmapping)/launch/gmapping.launch"/>
+
+    <!-- Launch move_base-->
+    <include file="$(find sar_exploration)/launch/includes/move_base.launch.xml"/>
+    
+    <!-- Initialize the planner and robots etc.-->
+    <!--include file="$(find sar_autonomy)/launch/sar_initialize.launch"/-->
+    
+</launch>

@@ -1,0 +1,25 @@
+<launch>
+  <!-- Launch RPLidar in /laser frame, publishes to /scan topic-->
+  <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+    <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>
+    <param name="serial_baudrate"     type="int"    value="115200"/>
+    <param name="frame_id"            type="string" value="laser"/>
+    <param name="inverted"            type="bool"   value="false"/>
+    <param name="angle_compensate"    type="bool"   value="true"/>
+  </node>
+
+  <!-- Establish transform between laser and base_link frames-->
+  <node pkg="tf" type="static_transform_publisher" name="laser_base_link" args="0 0.2 0 0 0 0 /base_link /laser 100"/>
+
+  <!-- Launch gmapping node-->
+  <include file="$(find sar_gmapping)/launch/includes/gmapping_rplidar.launch.xml"/>
+
+  <include file="$(find turtlebot_bringup)/launch/3dsensor.launch">
+    <arg name="rgb_processing" value="false" />
+    <arg name="depth_registration" value="false" />
+    <arg name="depth_processing" value="false" />
+    <arg name="scan_processing" value="true" /> 
+    <arg name="scan_topic" value="/scan" />
+  </include>
+
+</launch>

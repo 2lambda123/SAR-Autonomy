@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>sar_drone_interface</name>
+  <version>1.0.0</version>
+  <description>Action sever to interface between the planning system and the drone</description>
+
+  <maintainer email="vidits@kth.se">Vidit Saxena</maintainer>
+
+  <license>BSD</license>
+
+  <build_depend>actionlib</build_depend>
+  <build_depend>actionlib_msgs</build_depend>
+
+  <run_depend>actionlib</run_depend>
+  <run_depend>actionlib_msgs</run_depend>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+</package>
